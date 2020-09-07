@@ -18,7 +18,7 @@ export default class ContactForm extends Component {
     const contacts = this.props.contacts;
     // console.log('props',this.props);
     const { name } = this.state;
-    if (contacts.find(el => el.name === name)) {
+    if (contacts.find(el => el.name.toLowerCase() === name.toLowerCase())) {
       alert(`"${name}" is alredy in contacts `);
     } else {
       this.props.addUserContact(this.state.name, this.state.number);
@@ -30,14 +30,16 @@ export default class ContactForm extends Component {
       <form className={Styles.form__style}onSubmit={this.handleFormSubmit}>
         <label>
           <input
+          placeholder="Name"
           className={Styles.input__style}
-            type="text"
-            value={this.state.name}
-            onChange={this.handleChangeName}
+          type="text"
+          value={this.state.name}
+          onChange={this.handleChangeName}
           ></input>
         </label>
         <label>
           <input
+          placeholder="Number"
           className={Styles.input__style}
             type="number"
             value={this.state.number}
@@ -53,15 +55,15 @@ export default class ContactForm extends Component {
 }
 
 ContactForm.propTypes = {
-  contacts: PropTypes.array,
-  addUserContact: PropTypes.func,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      name:PropTypes.string,
+      number:PropTypes.string,
+      id:PropTypes.string
+
+    })
+  ).isRequired,
+  addUserContact: PropTypes.func.isRequired,
 };
 
-// FeedbackOptions.propTypes = {
-//   options: PropTypes.shape({
-//     good: PropTypes.number,
-//     neutral: PropTypes.number,
-//     bad: PropTypes.number,
-//   }).isRequired,
-//   onLeaveFeedback: PropTypes.func.isRequired,
-// };
+

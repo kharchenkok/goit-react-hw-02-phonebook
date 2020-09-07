@@ -8,6 +8,7 @@ export default function Filter({ handleFilter, filter }) {
       <label className={Style.lable__style}>
         Find contacts by name
         <input
+        placeholder="Name"
           className={Style.input__style}
           onChange={handleFilter}
           value={filter}

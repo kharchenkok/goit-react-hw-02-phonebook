@@ -24,7 +24,7 @@ export default class App extends Component {
 
   findUser=()=>{
       const{filter,contacts}=this.state;
-      return contacts.filter(elem=>elem.name.includes(filter))
+      return contacts.filter(elem=>elem.name.toLowerCase().includes(filter))
 
   };
   deleteUser=(id)=>{
